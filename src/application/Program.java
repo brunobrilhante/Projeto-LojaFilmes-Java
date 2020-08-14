@@ -13,7 +13,7 @@ public class Program {
 		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);		
-		ArrayFilm arrayFilm = null;
+		ArrayFilm arrayFilm = new ArrayFilm();;
 		Film film = null;
 		
 		System.out.println("---CADASTRO---");		
@@ -45,40 +45,31 @@ public class Program {
 			op = sc.nextInt();
 			switch(op) {
 			
-			case 1:
-				System.out.print("\nQuantidade de filmes que serão cadastrados: ");
-				int tamanho = sc.nextInt();
-				arrayFilm = new ArrayFilm(tamanho);
-				if(tamanho == 0) {
-					continue;
-				} else {					
-					for(int i = 0; i < tamanho; i++) {
-						sc.nextLine();
-						System.out.print("\nTítulo: ");
-						String nomeFilme = sc.nextLine();
+			case 1:									
+				sc.nextLine();
+				System.out.print("\nTítulo: ");
+				String nomeFilme = sc.nextLine();
 
-						int codigo = 0;						
-						boolean verifica = false;
-						while(verifica == false) {														
-							System.out.print("Código: ");
-							codigo = sc.nextInt();
-							sc.nextLine();
-							verifica = arrayFilm.verificar(codigo);										
-							if(verifica == false) System.out.println("\nCódigo já cadastrado\n");
-						}
-						
-						System.out.print("Gênero: ");
-						String genero = sc.nextLine();
-						System.out.print("Ano: ");
-						int ano = sc.nextInt();
-						System.out.print("Preço: R$");
-						double preco = sc.nextDouble();						
-						film = new Film(nomeFilme, genero, codigo, ano, preco);
-						film.setSituacao("Disponível");
-						arrayFilm.add(film);
-					}
-					break;
+				int codigo = 0;						
+				boolean verifica = false;
+				while(verifica == false) {														
+					System.out.print("Código: ");
+					codigo = sc.nextInt();
+					sc.nextLine();
+					verifica = arrayFilm.verificar(codigo);										
+					if(verifica == false) System.out.println("\nCódigo já cadastrado\n");
 				}
+				
+				System.out.print("Gênero: ");
+				String genero = sc.nextLine();
+				System.out.print("Ano: ");
+				int ano = sc.nextInt();
+				System.out.print("Preço: R$");
+				double preco = sc.nextDouble();						
+				film = new Film(nomeFilme, genero, codigo, ano, preco);
+				film.setSituacao("Disponível");
+				arrayFilm.add(film);
+				break;			
 			
 			case 2:
 				if(arrayFilm == null || arrayFilm.getIndice() == 0) {
@@ -99,7 +90,7 @@ public class Program {
 				}
 				else {
 					System.out.print("\nDigite o código do filme que deseja alterar: ");
-					int codigo = sc.nextInt();
+					codigo = sc.nextInt();
 					arrayFilm.update(codigo);
 				}
 				break;
